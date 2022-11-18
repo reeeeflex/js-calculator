@@ -51,7 +51,7 @@ class Calculator {
     const previous = parseFloat(this.previousOperand);
     const current = parseFloat(this.currentOperand);
     // if user just hits = with no numbers will cancel function call
-    if (isNaN(previous) && isNaN(current)) return;
+    if (isNaN(previous) || isNaN(current)) return;
     // switch statement that will be executed with each case include break to break and not call any other case
     switch (this.operation) {
       case '+':
@@ -76,11 +76,48 @@ class Calculator {
     this.operation = undefined;
     this.previousOperand = '';
   }
+
+  //   function will help with commas in the long numbers
+  getDisplayNumber(number) {
+    //   split the string on the decimal side of it
+    const stringNumber = number.toString();
+    /* string number is split on the decimal, will take the number and turn into an array 
+    the first part of the numbers is before the decimal */
+    const integerNumber = parseFloat(stringNumber.split('.')[0]);
+    // gets the first number AFTER the decimal
+    const decimalNumber = stringNumber.split('.')[1];
+    let integerDisplay;
+    // if nothing is inputted or just a decimal return nothing
+    if (isNaN(integerNumber)) {
+      integerDisplay = '';
+    } else {
+      // interger display is set to locale of english and no extra decimal can be added
+      integerDisplay = integerNumber.toLocaleString('en', {
+        maximumFractionDigits: 0,
+      });
+    }
+    // if user entered numbers before the . return integerDisplay and a . and all the decimal numbers
+    if (decimalNumber != null) {
+      return `${integerDisplay}.${decimalNumber}`;
+    } else {
+      return integerDisplay;
+    }
+  }
   //   updates the display to the output
   updateDisplay() {
     // display the current operand to text so display shows the output
-    this.currentOperandText.innerText = this.currentOperand;
-    this.previousOperandText.innerText = this.previousOperand;
+    this.currentOperandText.innerText = this.getDisplayNumber(
+      this.currentOperand
+    );
+    // if operation is not null then display will update with concatenated number and operator
+    if (this.operation != null) {
+      this.previousOperandText.innerText = `${this.getDisplayNumber(
+        this.previousOperand
+      )} ${this.operation}`;
+    } else {
+      // once = is pressed will set previous text to empty string
+      this.previousOperandText.innerText = '';
+    }
   }
 }
 
