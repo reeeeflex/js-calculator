@@ -81,3 +81,9 @@ operatorButtons.forEach(button => {
     calculator.updateDisplay();
   });
 });
+
+// when equalsButton is clicked will call compute and update the display
+equalsButton.addEventListener('click', () => {
+  calculator.compute();
+  calculator.updateDisplay();
+});
