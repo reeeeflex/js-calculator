@@ -12,7 +12,7 @@ class Calculator {
     //   sets the previous text and current text to empty string when clear is called
     this.previousOperand = '';
     this.currentOperand = '';
-    // want to set the current operation to undefined when clear is called
+    // set the current operation to undefined when clear is called
     this.operation = undefined;
   }
   //   delete operator function
@@ -22,7 +22,7 @@ class Calculator {
     /*   error handling for . if the user puts one . or if there is already
     a . in the currentOperand then end the function*/
     if (number === '.' && this.currentOperand.includes('.')) return;
-    /*   we change the current operrand to the number 
+    /*  change the current operand to the number 
     call toString so that js doesn't try to add the numbers*/
     this.currentOperand = this.currentOperand.toString() + number.toString();
   }
@@ -36,16 +36,46 @@ class Calculator {
       this.compute();
     }
     this.operation = operation;
-    // we want to set previous operand to the current operand so display updates with correct display
+    // set previous operand to the current operand, display updates with correct display
     this.previousOperand = this.currentOperand;
     // clear current operand
     this.currentOperand = '';
   }
   //   computes a single value of what needs to be displayed
-  compute() {}
+  compute() {
+    let computation;
+    // this will convert the string of previous operand into a number
+    const previous = parseFloat(this.previousOperand);
+    const current = parseFloat(this.currentOperand);
+    // if user just hits = with no numbers will cancel function call
+    if (isNaN(previous) && isNaN(current)) return;
+    // switch statement that will be executed with each case include break to break and not call any other case
+    switch (this.operation) {
+      case '+':
+        computation = previous + current;
+        break;
+      case '-':
+        computation = previous - current;
+        break;
+      case '&times;':
+        computation = previous * current;
+        break;
+      case '&divide;':
+        computation = previous / current;
+        break;
+      // if none of the symbols are pressed return nothing because something is wrong
+      default:
+        return;
+    }
+    //  set the current operand to compute and will do calculations
+    this.currentOperand = computation;
+    // set operation to undefined
+    this.operation = undefined;
+    this.previousOperand = '';
+  }
   //   updates the display to the output
   updateDisplay() {
-    //   we displat the current operand to text so display shows the output
+    // display the current operand to text so display shows the output
     this.currentOperandText.innerText = this.currentOperand;
     this.previousOperandText.innerText = this.previousOperand;
   }
@@ -68,16 +98,16 @@ numberButtons.forEach(button => {
   // everytime a number is pressed will append the number to the output display
   button.addEventListener('click', () => {
     calculator.appendNumber(button.innerText);
-    // we call updateDisplay to display our input
+    // call updateDisplay to display the input
     calculator.updateDisplay();
   });
 });
 operatorButtons.forEach(button => {
   // everytime a number is pressed will append the operator to the output display
   button.addEventListener('click', () => {
-    //   were going to pass the operation and update it within the innerText
+    //  going to pass the operation and update it within the innerText
     calculator.chooseOperator(button.innerText);
-    // we call updateDisplay to display our input
+    // call updateDisplay to display input
     calculator.updateDisplay();
   });
 });
@@ -85,5 +115,11 @@ operatorButtons.forEach(button => {
 // when equalsButton is clicked will call compute and update the display
 equalsButton.addEventListener('click', () => {
   calculator.compute();
+  calculator.updateDisplay();
+});
+
+// when AC is clicked will call clear and clear the display
+allClearButton.addEventListener('click', () => {
+  calculator.clear();
   calculator.updateDisplay();
 });
