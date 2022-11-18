@@ -36,12 +36,12 @@ body {
 .calc-grid > button {
   cursor: pointer;
   font-size: 2rem;
-  border: 1px solid white;
+  border: 1px solid var(--whiteblue);
   outline: none;
   background-color: var(--lightblue);
 }
 .calc-grid > button:hover {
-  background-color: #a8dadc99;
+  background-color: #a8dadccc;
 }
 
 .two-spaces {
@@ -61,9 +61,18 @@ body {
   justify-content: space-around;
   /* aligns text vertically */
   flex-direction: column;
-  padding: 1rem 0;
+  padding: 1rem;
   /* to break the word in the middle not at the end of the word */
   word-wrap: break-word;
   /* want to break all words */
   word-break: break-all;
+}
+
+.previous-operand {
+  color: #f1faeeb7;
+  font-size: 1.5rem;
+}
+.current-operand {
+  color: var(--whiteblue);
+  font-size: 3rem;
 }
