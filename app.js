@@ -16,7 +16,10 @@ class Calculator {
     this.operation = undefined;
   }
   //   delete operator function
-  delete() {}
+  delete() {
+    //   will take all the numbers in currentOperand from index 0 all the way to the end and slice off the last one
+    this.currentOperand = this.currentOperand.toString().slice(0, -1);
+  }
   // appends the number the user puts in to the display
   appendNumber(number) {
     /*   error handling for . if the user puts one . or if there is already
@@ -57,10 +60,10 @@ class Calculator {
       case '-':
         computation = previous - current;
         break;
-      case '&times;':
+      case '×':
         computation = previous * current;
         break;
-      case '&divide;':
+      case '÷':
         computation = previous / current;
         break;
       // if none of the symbols are pressed return nothing because something is wrong
@@ -121,5 +124,11 @@ equalsButton.addEventListener('click', () => {
 // when AC is clicked will call clear and clear the display
 allClearButton.addEventListener('click', () => {
   calculator.clear();
+  calculator.updateDisplay();
+});
+
+// when DEL is clicked will call delete and delete last number and update the display
+deleteButton.addEventListener('click', () => {
+  calculator.delete();
   calculator.updateDisplay();
 });
