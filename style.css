@@ -53,4 +53,17 @@ body {
 .output {
   /* we want it to span from the first column to the last one (-1) */
   grid-column: 1 /-1;
+  background-color: var(--darkblue);
+  /* We have to flex and end so that it moves to the right */
+  display: flex;
+  align-items: flex-end;
+  /* makes the gap closer */
+  justify-content: space-around;
+  /* aligns text vertically */
+  flex-direction: column;
+  padding: 1rem 0;
+  /* to break the word in the middle not at the end of the word */
+  word-wrap: break-word;
+  /* want to break all words */
+  word-break: break-all;
 }
