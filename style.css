@@ -22,7 +22,9 @@ body {
 .calc-grid {
   display: grid;
   justify-content: center;
-  align-items: cetner;
+  /* aligns the content of the buttons  so they dont
+  look strange */
+  align-content: center;
   min-height: 100vh;
   /* columns are going to repeat, have 4 columns and be 100px wide */
   grid-template-columns: repeat(4, 100px);
@@ -40,4 +42,15 @@ body {
 }
 .calc-grid > button:hover {
   background-color: #a8dadc99;
+}
+
+.two-spaces {
+  /* adding span to columns with this class */
+  grid-column: span 2;
+}
+
+/* to fix output screen */
+.output {
+  /* we want it to span from the first column to the last one (-1) */
+  grid-column: 1 /-1;
 }
