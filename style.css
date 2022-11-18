@@ -1,0 +1,43 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: 'Oswald', sans-serif;
+  font-style: normal;
+}
+:root {
+  --darkblue: #1d3557;
+  --blue: #457b9d;
+  --lightblue: #a8dadc;
+  --whiteblue: #f1faee;
+  --red: #e63946;
+}
+
+body {
+  background: var(--blue);
+  margin: 0;
+  padding: 0;
+}
+
+.calc-grid {
+  display: grid;
+  justify-content: center;
+  align-items: cetner;
+  min-height: 100vh;
+  /* columns are going to repeat, have 4 columns and be 100px wide */
+  grid-template-columns: repeat(4, 100px);
+  /* grid rows will have minmax of 120px and max of auto
+  we also want it to have 5 rows as there is 5 buttons */
+  grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+}
+
+.calc-grid > button {
+  cursor: pointer;
+  font-size: 2rem;
+  border: 1px solid white;
+  outline: none;
+  background-color: var(--lightblue);
+}
+.calc-grid > button:hover {
+  background-color: #a8dadc99;
+}
